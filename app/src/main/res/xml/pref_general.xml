@@ -8,10 +8,10 @@
         android:selectAllOnFocus="true"
         android:singleLine="true"
         android:title="@string/location"
-        android:defaultValue="@string/location_default_value" />
+        android:defaultValue="@string/pref_location_default" />
 
     <ListPreference
-        android:key="@string/pref_temperature_units_key"
+        android:key="@string/pref_units_key"
         android:title="@string/title_temperature_units"
         android:dialogTitle="@string/title_temperature_units"
         android:entries="@array/pref_temperature_units_entries"
