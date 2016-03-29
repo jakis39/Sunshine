@@ -14,6 +14,7 @@ import android.widget.TextView;
  * from a {@link android.database.Cursor} to a {@link android.widget.ListView}.
  */
 public class ForecastAdapter extends CursorAdapter {
+    private final String LOG_TAG = ForecastAdapter.class.getSimpleName();
     private static final int VIEW_TYPE_TODAY = 0;
     private static final int VIEW_TYPE_FUTURE_DAY = 1;
     private static final int VIEW_TYPE_COUNT = 2;
@@ -104,8 +105,15 @@ public class ForecastAdapter extends CursorAdapter {
 
         // Read weather icon ID from cursor
         int weatherId = cursor.getInt(ForecastFragment.COL_WEATHER_ID);
-        // Use placeholder image for now
-        viewHolder.iconView.setImageResource(R.drawable.ic_launcher);
+        int viewType = getItemViewType(cursor.getPosition());
+        int iconResource;
+
+        if(viewType == VIEW_TYPE_TODAY)
+            iconResource = Utility.getArtResourceForWeatherCondition(weatherId);
+        else
+            iconResource = Utility.getIconResourceForWeatherCondition(weatherId);
+
+        viewHolder.iconView.setImageResource(iconResource);
 
         long date = cursor.getLong(ForecastFragment.COL_WEATHER_DATE);
         viewHolder.dateView.setText(Utility.getFriendlyDayString(context, date));

@@ -148,7 +148,9 @@ public class DetailFragment extends Fragment implements LoaderManager.LoaderCall
         mLowView.setText(Utility.formatTemperature(
                 getActivity(), data.getFloat(COL_WEATHER_MIN_TEMP), isMetric));
 
-        mForecastImg.setImageResource(R.drawable.ic_launcher);
+        int weatherId = data.getInt(COL_WEATHER_ID);
+        int iconResource = Utility.getArtResourceForWeatherCondition(weatherId);
+        mForecastImg.setImageResource(iconResource);
 
         mDescriptionView.setText(data.getString(COL_WEATHER_DESC));
 
